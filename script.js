@@ -174,3 +174,35 @@ function revealOnScroll(){
 window.addEventListener("scroll", revealOnScroll);
 
 revealOnScroll();
+// =========================
+// HAMBURGER MENU
+// =========================
+
+const hamburger = document.getElementById("hamburger");
+const mobileNav = document.getElementById("mobileNav");
+const mobileLinks = document.querySelectorAll(".mobile-link, .mobile-talk-btn");
+
+if (hamburger && mobileNav) {
+    hamburger.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle("open");
+        mobileNav.classList.toggle("open");
+        document.body.style.overflow = mobileNav.classList.contains("open") ? "hidden" : "";
+    });
+
+    mobileLinks.forEach(link => {
+        link.addEventListener("click", () => {
+            hamburger.classList.remove("open");
+            mobileNav.classList.remove("open");
+            document.body.style.overflow = "";
+        });
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+            hamburger.classList.remove("open");
+            mobileNav.classList.remove("open");
+            document.body.style.overflow = "";
+        }
+    });
+}
